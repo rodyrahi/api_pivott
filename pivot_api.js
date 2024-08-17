@@ -4,6 +4,8 @@ const app = express()
 const port = 6060
 
 
+app.use(express.urlencoded({ extended: true }));
+
 app.post('/api', (req, res) => {
     const test = req.body;
     console.log(test);
