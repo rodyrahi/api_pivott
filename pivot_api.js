@@ -8,7 +8,13 @@
     app.post('/api', (req, res) => {
         const test = req.body;
         console.log(test);
-        res.sendStatus(200);
+        if (test["version"] < 0.0001) {
+            res.send({"update":"yes"})
+        }
+        else {
+            res.send({"update":"no"})
+        }
+      
     })
 
     app.get('/', (req, res) => {
