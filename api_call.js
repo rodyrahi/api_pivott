@@ -14,7 +14,8 @@ async function generateText(prompt) {
       model: 'gpt-4o',
       messages: [
         { role: 'system', content: "You are an expert data scientist" } ,
-        { role: 'user', content: prompt + ` : Without any comment, return the result in the following JSON format 
+        { role: 'system', content: prompt},
+        { role: 'user', content:  `Without any comment, return the result in the following JSON format 
     {{column: look every single column very carefully and from these steps select one or more (try to select more steps if possible ) also if imputing tell the strategy [dropna,impute:mean/median/most_frequent,encoding_categorical_data,drop_duplicates,drop_column,outlier_removing]}}` } 
 
       ],
