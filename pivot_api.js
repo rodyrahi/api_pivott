@@ -33,6 +33,20 @@ app.post('/api', (req, res) => {
     }
 });
 
+
+app.get('/download', (req, res) => {
+    const { filename } = req.params;
+    const filePath = `${__dirname}/static/pivott.exe`;
+    res.download(filePath, (err) => {
+        if (err) {
+            res.status(404).send('File not found');
+        }
+    });
+});
+
+
+
+
 // app.get('/', (req, res) => {
 //     res.send('Hello World! , pivott here');
 // });
