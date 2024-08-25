@@ -13,6 +13,9 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 
+let VERSION = 0.0001;
+
+
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -23,10 +26,19 @@ app.post('/api/data', async (req, res) => {
 
 })
 
+
+app.post('/api/setversion', (req, res) => {
+    const test = req.body;
+    VERSION = test["version"];
+    res.send("Version Updated to " + VERSION);
+
+})
+
+
 app.post('/api', (req, res) => {
     const test = req.body;
     console.log(test);
-    if (test["version"] < 0.0001) {
+    if (test["version"] < VERSION) {
         res.send({"update":"yes"});
     } else {
     res.send({"update":"no"});
