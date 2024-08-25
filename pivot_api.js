@@ -1,10 +1,9 @@
+require('dotenv').config(); // Load the .env file
+
 const express = require('express');
 const app = express();
 const port = 6060;
 const { generateText } = require('./api_call.js');
-
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,28 +11,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-
-let VERSION = 0.0001;
-
+// Initialize VERSION from the .env file
+let VERSION = parseFloat(process.env.VERSION) || 0.0001;
 
 app.get('/', (req, res) => {
     res.render('index');
 });
-app.post('/api/data', async (req, res) => {
 
+app.post('/api/data', async (req, res) => {
     const result = await generateText(req.body.prompt); 
     res.send({"result":result});
-
 })
-
 
 app.post('/api/setversion', (req, res) => {
     const test = req.body;
     VERSION = test["version"];
+    
+    // Update the .env file with the new version
+    const fs = require('fs');
+    fs.writeFileSync('.env', `VERSION=${VERSION}\n`);
+
     res.send("Version Updated to " + VERSION);
-
 })
-
 
 app.post('/api', (req, res) => {
     const test = req.body;
@@ -41,10 +40,9 @@ app.post('/api', (req, res) => {
     if (test["version"] < VERSION) {
         res.send({"update":"yes"});
     } else {
-    res.send({"update":"no"});
+        res.send({"update":"no"});
     }
 });
-
 
 app.get('/download', (req, res) => {
     const { filename } = req.params;
@@ -55,17 +53,6 @@ app.get('/download', (req, res) => {
         }
     });
 });
-
-
-
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World! , pivott here');
-// });
-
-
-
-
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
