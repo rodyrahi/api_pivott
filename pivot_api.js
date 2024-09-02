@@ -64,9 +64,24 @@ app.post('/api', (req, res) => {
     // });
 // });
 
-app.get('/download/:email', (req, res) => {
-    const { filename } = req.params;
-    const email  = req.params.email;
+
+app.get('/testers', (req, res) => {
+
+    res.render('testers')
+
+});
+
+
+
+
+
+app.post('/beta-test', (req, res) => {
+
+    
+    const { email } = req.body;
+
+    console.log(req.body);
+    
     
     if (emails.includes(email)) {
     const filePath = `${__dirname}/static/pivott.exe`;
