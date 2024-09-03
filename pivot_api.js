@@ -17,11 +17,17 @@ app.set('view engine', 'ejs');
 let VERSION = parseFloat(process.env.VERSION) || 0.0001;
 
 
+const fs = require('fs');
 
-
-const emails = ['jasminekherajani12@gmail.com' , 'heynitin110493@gmail.com' , 'dataanalystnitinp@gmail.com' , 
-    
-    'sd141299@gmail.com' , 'shrivastavashaifali3@gmail.com' , 'taslimnkhan2004@gmail.com' , 'vibhathakur1206@gmail.com' ]
+// Read emails from emails.json
+let emails;
+try {
+    const emailsData = fs.readFileSync('emails.json', 'utf8');
+    emails = JSON.parse(emailsData).emails;
+} catch (error) {
+    console.error('Error reading emails.json:', error);
+    emails = [];
+}
 
 
 
