@@ -109,11 +109,11 @@ app.post('/beta-test', (req, res) => {
 `
 Hello,
 
-Thank you for choosing Pivott! We’re thrilled to have you on board. To get started, simply click the link below to download the app:
+Thank you for choosing Pivott! We're thrilled to have you on board. To get started, simply click the link below to download the app:
 
 ${link}
 
-We hope you enjoy using Pivott and discover how it can simplify your tasks. If you have any questions or need assistance, don’t hesitate to reach out.
+We hope you enjoy using Pivott and discover how it can simplify your tasks. If you have any questions or need assistance, don't hesitate to reach out.
 
 Best regards,
 The Pivott Team
@@ -150,20 +150,18 @@ app.get(`/download/:code`, (req, res) => {
 });
 
 
-app.get('/download/testing', (req, res) => {
-    print("testing")
+app.get('/download-testing/', (req, res) => {
+    console.log("testing");
     const filePath = `${__dirname}/static/pivott.exe`;
     res.download(filePath, (err) => {
         if (err) {
+            console.error('Error downloading file:', err);
             res.status(404).send('File not found');
+        } else {
+            console.log('File downloaded successfully');
         }
     });
-    
-   
-
 });
-
-
 
 
 
