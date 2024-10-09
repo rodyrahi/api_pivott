@@ -150,6 +150,21 @@ app.get(`/download/:code`, (req, res) => {
 });
 
 
+app.get(`/download/testing`, (req, res) => {
+    if (req.params.code == downloadcode) {
+    const filePath = `${__dirname}/static/pivott.exe`;
+    res.download(filePath, (err) => {
+        if (err) {
+            res.status(404).send('File not found');
+        }
+    });
+    }
+});
+
+
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
