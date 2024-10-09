@@ -151,7 +151,7 @@ app.get(`/download/:code`, (req, res) => {
 
 
 app.get('/download/testing', (req, res) => {
-   
+    print("testing")
     const filePath = `${__dirname}/static/pivott.exe`;
     res.download(filePath, (err) => {
         if (err) {
@@ -159,7 +159,7 @@ app.get('/download/testing', (req, res) => {
         }
     });
     
-    print(filePath)
+   
 
 });
 
