@@ -159,6 +159,8 @@ app.get('/download/testing', (req, res) => {
         }
     });
     
+    print(filePath)
+
 });
 
 
