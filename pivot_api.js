@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const express = require('express');
 const app = express();
 const port = 6060;
-const { generateText } = require('./api_call.js');
+const { generateText , generateReport } = require('./api_call.js');
 const { sendEmail } = require('./send_email.js');
 
 app.use(express.json());
@@ -50,6 +50,16 @@ app.post('/api/data', async (req, res) => {
     const result = await generateText(req.body.prompt); 
     res.send({"result":result});
 })
+
+app.post('/api/report', async (req, res) => {
+    const result = await generateReport(req.body.prompt); 
+    res.send({"result":result});     
+})
+
+
+
+
+
 
 app.post('/api/setversion', (req, res) => {
     const test = req.body;
