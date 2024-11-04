@@ -41,7 +41,7 @@ async function generateReport(prompt) {
       messages: [
         { role: 'system', content: "You are an expert data scientist , provide output in valid json" } ,
         { role: 'system', content: prompt ? prompt : "" },
-        { role: 'user', content:  `Without any comment, return the result in json , the json in which write what kinda graph to make and what are the varibales to add in the graps and what are the columns to use` }
+        { role: 'user', content:  `Without any comment, return the result in json , the json in which write what kinda graph to make and what are the varibales to add in the graps and what are the columns to use example : {graphs_type:"bar",x_axis:"",y_axis:"",title:"",color:"",size:"" , hue:""}` }
   ],
 });
 
